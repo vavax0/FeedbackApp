@@ -1,18 +1,25 @@
-import Link from 'next/link'
+import React, { Fragment } from "react";
+import { Container } from "react-bootstrap";
+import FeatureBox from "../components/FeatureBox";
 
-export default function Home() {
+import FEEDBACK_DATA from "../server/data";
+
+import classes from "../styles/index.module.css";
+
+const index = () => {
   return (
-    <ul>
-      <li>
-        <Link href="/b" as="/a">
-          <a>a</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/a" as="/b">
-          <a>b</a>
-        </Link>
-      </li>
-    </ul>
-  )
-}
+    <Container className={classes.container}>
+      {FEEDBACK_DATA.map((feedback) => {
+        return (
+          <FeatureBox
+            className={classes.container__box}
+            feedback={feedback}
+            key={feedback.id}
+          />
+        );
+      })}
+    </Container>
+  );
+};
+
+export default index;
