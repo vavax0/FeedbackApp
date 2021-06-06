@@ -1,4 +1,4 @@
-const feedback = [
+module.exports = [
   {
     id: 1,
     title: 'The "arrival" transition is awesome.',
@@ -21,4 +21,3 @@ const feedback = [
   },
 ];
 
-export default feedback;

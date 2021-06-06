@@ -1,9 +1,14 @@
 // import App from 'next/app'
 import "bootstrap/dist/css/bootstrap.min.css";
+import { GlobalProvider } from "../store/Provider";
 import "../styles/global.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <GlobalProvider>
+      <Component {...pageProps} />
+    </GlobalProvider>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for
