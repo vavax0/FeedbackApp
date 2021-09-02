@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-top: 10%;
+}
+
+.container__header {
+  background-color: #21d4fd;
+  background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
+  padding: 30px;
+  color: #fff;
+  border-radius: 10px 10px 0 0;
+}
+
+.container__list {
+  background-color: rgb(29, 29, 29);
+  border-radius: 0 0 10px 10px;
+}
+
+.container__box {
+  margin: 20px 0;
+}

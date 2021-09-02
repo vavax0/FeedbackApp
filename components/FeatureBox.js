@@ -1,29 +1,23 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Link from "next/link";
-
 import classes from "./FeatureBox.module.css";
-import { listFeedbackList } from "../store/actions/getFeedbackListAction";
-import { GlobalContext } from "../store/Provider";
+import { useRouter } from "next/dist/client/router";
 
-const FeatureBox = ({ feedback }) => {
-  // const { feedbackState, feedbackDispatch } = useContext(GlobalContext);
-  // useEffect(() => {
-  //   listFeedbackList()(feedbackDispatch);
-  //   const { loading, feedbackList, error } = feedbackState;
-  //   console.log(feedbackList);
-  // }, []);
+const FeatureBox = ({ feedback, id }) => {
+  const router = useRouter();
+  const { boardId } = router.query;
 
   return (
     <Row className={classes.row}>
       <Col sm={10}>
-        <Link href="/">
+        <b>{feedback.title} </b>
+        <span>#{id}</span>
+        <Link href={`/${boardId}/${feedback._id}`}>
           <a>
-            {feedback.title}
-            <span> #{feedback.id}</span>
+            <p>{feedback.body}</p>
           </a>
         </Link>
-        <p>{feedback.content}</p>
       </Col>
       <Col sm={2} className="align-self-center">
         <Button>Upvote {feedback.votes}</Button>

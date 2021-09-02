@@ -1,13 +1,35 @@
 // import App from 'next/app'
+import Router from "next/router";
+import NProgress from "nprogress";
+import { wrapper } from "../store/store";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { GlobalProvider } from "../store/Provider";
 import "../styles/global.css";
+import "../styles/nprogress.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useCallback, useEffect } from "react";
+import { verifyUser } from "../store/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps }) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(verifyUser());
+    setInterval(() => {
+      dispatch(verifyUser());
+    }, 5 * 60 * 1000);
+  }, []);
+
   return (
-    <GlobalProvider>
+    <>
       <Component {...pageProps} />
-    </GlobalProvider>
+      <ToastContainer />
+    </>
   );
 }
 
@@ -23,4 +45,4 @@ function MyApp({ Component, pageProps }) {
 //   return { ...appProps }
 // }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
